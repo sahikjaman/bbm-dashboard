@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Calendar, Droplet, TrendingUp, Activity, RefreshCw, ChevronDown, AlertCircle, Sun, Moon, Monitor, Menu, X } from 'lucide-react';
 
@@ -227,8 +228,14 @@ const BBMDashboard = () => {
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${colors.bg}`}>
-      {/* Header */}
-      <header className={`bg-gradient-to-r ${colors.headerBg} shadow-2xl border-b ${colors.headerBorder}`}>
+      <Head>
+        <title>BBM Dashboard - Sistem Monitoring Real-time</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Dashboard monitoring konsumsi BBM real-time" />
+      </Head>
+
+      {/* Header - Sticky */}
+      <header className={`sticky top-0 z-50 bg-gradient-to-r ${colors.headerBg} shadow-2xl border-b ${colors.headerBorder} backdrop-blur-lg`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 sm:space-x-4">
