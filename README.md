@@ -1,6 +1,7 @@
 # 🚗 BBM Dashboard - Sistem Monitoring BBM Real-time
 
-Dashboard monitoring konsumsi BBM (Bahan Bakar Minyak) berbasis web dengan visualisasi data real-time menggunakan Next.js dan Google Sheets API.
+Dashboard monitoring konsumsi BBM (Bahan Bakar Minyak) berbasis web dengan visualisasi data real-time 
+<img width="1257" height="805" alt="image" src="https://github.com/user-attachments/assets/31f9a822-d796-4466-a89c-94b1edbc8130" />
 
 ## ✨ Fitur
 
@@ -43,8 +44,8 @@ npm install
 npm run dev
 ```
 
-5. Buka browser di [http://localhost:3000](http://localhost:3000)
-
+5. Buka browser
+6. 
 ## 📦 Build untuk Production
 
 ```bash
@@ -77,5 +78,3 @@ Kontribusi sangat diterima! Silakan buat Pull Request atau laporkan issue.
 Dikembangkan dengan ❤️ untuk monitoring BBM yang lebih efisien.
 
 ---
-
-**Note**: Pastikan API Key dan Spreadsheet ID Anda sudah dikonfigurasi dengan benar sebelum deployment ke production.
