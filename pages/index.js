@@ -9,7 +9,6 @@ const BBMDashboard = () => {
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState('today');
   const [selectedUnit, setSelectedUnit] = useState('all');
-  const [selectedLokasi, setSelectedLokasi] = useState('all');
   const [lastUpdate, setLastUpdate] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [theme, setTheme] = useState('system');
@@ -19,7 +18,7 @@ const BBMDashboard = () => {
   // Konfigurasi Google Sheets API
   const SPREADSHEET_ID = '19CqWWOKZHidixF36wK0PCQpV6LfBYH1AVkbGIQ8PxU4';
   const API_KEY = 'AIzaSyD6XhnTcm_7I318ksOYjv26sbKVwy9dUYw';
-  const RANGE = 'REPORT!A:E'; // Sheet REPORT, kolom A sampai E (tambah kolom Lokasi)
+  const RANGE = 'Log!A:D'; // Sheet Log, kolom A sampai D (WAKTU, UNIT, VOLUME, LOKASI)
 
   // Theme management
   useEffect(() => {
@@ -112,7 +111,7 @@ const BBMDashboard = () => {
       const result = await response.json();
       const rows = result.values || [];
       
-      // Skip header row dan parse data (dengan kolom lokasi)
+      // Skip header row dan parse data (WAKTU, UNIT, VOLUME, LOKASI)
       const parsedData = rows.slice(1).map((row, index) => ({
         id: index + 1,
         timestamp: row[0] || '',
@@ -120,8 +119,7 @@ const BBMDashboard = () => {
         time: row[0] ? row[0].split(' ')[1] : '',
         unit: row[1] || '',
         volume: parseFloat(row[2]) || 0,
-        epc: row[3] || '',
-        lokasi: row[4] || '' // Kolom lokasi baru
+        lokasi: row[3] || ''
       })).filter(item => item.timestamp); // Filter data yang valid
 
       setData(parsedData.reverse()); // Terbaru di atas
@@ -172,11 +170,6 @@ const BBMDashboard = () => {
     // Filter by unit
     if (selectedUnit !== 'all') {
       filtered = filtered.filter(item => item.unit === selectedUnit);
-    }
-
-    // Filter by lokasi
-    if (selectedLokasi !== 'all') {
-      filtered = filtered.filter(item => item.lokasi === selectedLokasi);
     }
 
     return filtered;
@@ -369,7 +362,7 @@ const BBMDashboard = () => {
 
         {/* Filters */}
         <div className={`${colors.cardBg} rounded-xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6 mb-6`}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className={`block text-sm font-medium ${colors.textAccent} mb-2`}>
                 <Calendar className="w-4 h-4 inline mr-2" />
@@ -398,24 +391,8 @@ const BBMDashboard = () => {
                 className={`w-full ${colors.inputBg} border ${colors.inputBorder} ${colors.inputText} rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all`}
               >
                 <option value="all">Semua Unit</option>
-                {[...new Set(data.map(item => item.unit))].filter(Boolean).map(unit => (
+                {[...new Set(data.map(item => item.unit))].map(unit => (
                   <option key={unit} value={unit}>{unit}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium ${colors.textAccent} mb-2`}>
-                <TrendingUp className="w-4 h-4 inline mr-2" />
-                Lokasi
-              </label>
-              <select
-                value={selectedLokasi}
-                onChange={(e) => setSelectedLokasi(e.target.value)}
-                className={`w-full ${colors.inputBg} border ${colors.inputBorder} ${colors.inputText} rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all`}
-              >
-                <option value="all">Semua Lokasi</option>
-                {[...new Set(data.map(item => item.lokasi))].filter(Boolean).map(lokasi => (
-                  <option key={lokasi} value={lokasi}>{lokasi}</option>
                 ))}
               </select>
             </div>
@@ -592,20 +569,17 @@ const BBMDashboard = () => {
                     Unit
                   </th>
                   <th className={`px-4 sm:px-6 py-3 text-left text-xs font-medium ${colors.textAccent} uppercase tracking-wider`}>
-                    Lokasi
-                  </th>
-                  <th className={`px-4 sm:px-6 py-3 text-left text-xs font-medium ${colors.textAccent} uppercase tracking-wider`}>
                     Volume
                   </th>
-                  <th className={`hidden lg:table-cell px-4 sm:px-6 py-3 text-left text-xs font-medium ${colors.textAccent} uppercase tracking-wider`}>
-                    EPC
+                  <th className={`hidden sm:table-cell px-4 sm:px-6 py-3 text-left text-xs font-medium ${colors.textAccent} uppercase tracking-wider`}>
+                    Lokasi
                   </th>
                 </tr>
               </thead>
               <tbody className={colors.tableDivider}>
                 {filteredData.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className={`px-4 sm:px-6 py-8 text-center ${colors.textSecondary}`}>
+                    <td colSpan="4" className={`px-4 sm:px-6 py-8 text-center ${colors.textSecondary}`}>
                       Tidak ada data untuk periode yang dipilih
                     </td>
                   </tr>
@@ -623,16 +597,11 @@ const BBMDashboard = () => {
                           {item.unit}
                         </span>
                       </td>
-                      <td className={`px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm ${colors.text}`}>
-                        <span className={`px-2 py-1 inline-flex text-xs sm:text-sm leading-5 font-medium rounded-lg ${actualTheme === 'dark' ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30' : 'bg-violet-100 text-violet-800 border border-violet-300'}`}>
-                          {item.lokasi || '-'}
-                        </span>
-                      </td>
                       <td className={`px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-bold ${actualTheme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
                         {item.volume.toFixed(2)} L
                       </td>
-                      <td className={`hidden lg:table-cell px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm ${colors.textSecondary} font-mono`}>
-                        {item.epc}
+                      <td className={`hidden sm:table-cell px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm ${colors.text}`}>
+                        {item.lokasi}
                       </td>
                     </tr>
                   ))
