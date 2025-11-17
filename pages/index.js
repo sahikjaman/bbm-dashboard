@@ -118,17 +118,32 @@ const BBMDashboard = () => {
         return days[date.getDay()];
       };
       
+      // Fungsi untuk format tanggal dalam Bahasa Indonesia
+      const formatDate = (dateString) => {
+        const months = [
+          'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+          'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+      };
+      
       // Skip header row dan parse data (WAKTU, UNIT, VOLUME, LOKASI)
       const parsedData = rows.slice(1).map((row, index) => {
         const timestamp = row[0] || '';
         const date = timestamp ? timestamp.split(' ')[0] : '';
         const time = timestamp ? timestamp.split(' ')[1] : '';
         const dayName = date ? getDayName(date) : '';
+        const formattedDate = date ? formatDate(date) : '';
         
         return {
           id: index + 1,
           timestamp: timestamp,
           date: date,
+          formattedDate: formattedDate,
           time: time,
           dayName: dayName,
           unit: row[1] || '',
@@ -599,11 +614,18 @@ const BBMDashboard = () => {
                     </td>
                   </tr>
                 ) : (
-                  filteredData.map((item) => (
-                    <tr key={item.id} className={colors.tableHover}>
-                      <td className={`px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm ${colors.text}`}>
+                  filteredData.map((item, index) => (
+                    <tr 
+                      key={item.id} 
+                      className={`${colors.tableHover} transition-colors ${
+                        index % 2 === 0 
+                          ? (actualTheme === 'dark' ? 'bg-slate-800/30' : 'bg-slate-50/50')
+                          : (actualTheme === 'dark' ? 'bg-slate-900/30' : 'bg-white')
+                      }`}
+                    >
+                      <td className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm ${colors.text}`}>
                         <div>
-                          <div className="font-medium">{item.dayName}, {item.date}</div>
+                          <div className="font-medium">{item.dayName}, {item.formattedDate}</div>
                           <div className={colors.textSecondary}>{item.time}</div>
                         </div>
                       </td>
