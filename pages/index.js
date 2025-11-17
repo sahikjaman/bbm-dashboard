@@ -111,16 +111,31 @@ const BBMDashboard = () => {
       const result = await response.json();
       const rows = result.values || [];
       
+      // Fungsi untuk mendapatkan nama hari dalam Bahasa Indonesia
+      const getDayName = (dateString) => {
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const date = new Date(dateString);
+        return days[date.getDay()];
+      };
+      
       // Skip header row dan parse data (WAKTU, UNIT, VOLUME, LOKASI)
-      const parsedData = rows.slice(1).map((row, index) => ({
-        id: index + 1,
-        timestamp: row[0] || '',
-        date: row[0] ? row[0].split(' ')[0] : '',
-        time: row[0] ? row[0].split(' ')[1] : '',
-        unit: row[1] || '',
-        volume: parseFloat(row[2]) || 0,
-        lokasi: row[3] || ''
-      })).filter(item => item.timestamp); // Filter data yang valid
+      const parsedData = rows.slice(1).map((row, index) => {
+        const timestamp = row[0] || '';
+        const date = timestamp ? timestamp.split(' ')[0] : '';
+        const time = timestamp ? timestamp.split(' ')[1] : '';
+        const dayName = date ? getDayName(date) : '';
+        
+        return {
+          id: index + 1,
+          timestamp: timestamp,
+          date: date,
+          time: time,
+          dayName: dayName,
+          unit: row[1] || '',
+          volume: parseFloat(row[2]) || 0,
+          lokasi: row[3] || ''
+        };
+      }).filter(item => item.timestamp); // Filter data yang valid
 
       setData(parsedData.reverse()); // Terbaru di atas
       setLastUpdate(new Date());
@@ -588,7 +603,7 @@ const BBMDashboard = () => {
                     <tr key={item.id} className={colors.tableHover}>
                       <td className={`px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm ${colors.text}`}>
                         <div>
-                          <div className="font-medium">{item.date}</div>
+                          <div className="font-medium">{item.dayName}, {item.date}</div>
                           <div className={colors.textSecondary}>{item.time}</div>
                         </div>
                       </td>
