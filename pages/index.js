@@ -57,43 +57,43 @@ const BBMDashboard = () => {
 
   // Theme colors
   const colors = actualTheme === 'dark' ? {
-    bg: 'from-slate-900 via-slate-800 to-slate-900',
-    headerBg: 'from-slate-800 to-slate-900',
-    headerBorder: 'border-cyan-500/30',
-    cardBg: 'bg-slate-800/50 backdrop-blur-md',
-    cardBorder: 'border-slate-700/50',
-    text: 'text-white',
+    bg: 'from-slate-950 via-slate-900 to-slate-950',
+    headerBg: 'from-slate-900/95 via-slate-800/95 to-slate-900/95',
+    headerBorder: 'border-cyan-500/20',
+    cardBg: 'bg-gradient-to-br from-slate-800/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl',
+    cardBorder: 'border-slate-700/30',
+    text: 'text-slate-50',
     textSecondary: 'text-slate-400',
     textAccent: 'text-cyan-400',
-    inputBg: 'bg-slate-700/50',
-    inputBorder: 'border-slate-600',
-    inputText: 'text-white',
-    tableBg: 'bg-slate-900/50',
-    tableHover: 'hover:bg-slate-700/30',
-    tableDivider: 'divide-slate-700/50',
+    inputBg: 'bg-slate-800/60',
+    inputBorder: 'border-slate-600/50',
+    inputText: 'text-slate-50',
+    tableBg: 'bg-slate-900/60',
+    tableHover: 'hover:bg-slate-700/40',
+    tableDivider: 'divide-slate-700/40',
     chartGrid: '#334155',
     chartAxis: '#94a3b8',
     chartTooltipBg: '#1e293b',
     chartTooltipBorder: '#334155',
   } : {
-    bg: 'from-gray-50 via-white to-gray-50',
-    headerBg: 'from-white to-gray-50',
-    headerBorder: 'border-blue-200',
-    cardBg: 'bg-white/90 backdrop-blur-md',
-    cardBorder: 'border-gray-200',
-    text: 'text-gray-900',
-    textSecondary: 'text-gray-600',
+    bg: 'from-slate-50 via-blue-50/30 to-slate-50',
+    headerBg: 'from-white/95 via-blue-50/80 to-white/95',
+    headerBorder: 'border-blue-200/50',
+    cardBg: 'bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 backdrop-blur-xl',
+    cardBorder: 'border-slate-200/60',
+    text: 'text-slate-900',
+    textSecondary: 'text-slate-600',
     textAccent: 'text-blue-600',
-    inputBg: 'bg-white',
-    inputBorder: 'border-gray-300',
-    inputText: 'text-gray-900',
-    tableBg: 'bg-gray-50',
-    tableHover: 'hover:bg-gray-100',
-    tableDivider: 'divide-gray-200',
-    chartGrid: '#e5e7eb',
-    chartAxis: '#6b7280',
+    inputBg: 'bg-white/80',
+    inputBorder: 'border-slate-300/60',
+    inputText: 'text-slate-900',
+    tableBg: 'bg-slate-50/60',
+    tableHover: 'hover:bg-blue-50/60',
+    tableDivider: 'divide-slate-200/60',
+    chartGrid: '#e2e8f0',
+    chartAxis: '#64748b',
     chartTooltipBg: '#ffffff',
-    chartTooltipBorder: '#e5e7eb',
+    chartTooltipBorder: '#e2e8f0',
   };
 
   // Fungsi untuk fetch data dari Google Sheets
@@ -202,8 +202,17 @@ const BBMDashboard = () => {
     volume: Math.round(volumeByDate[date] * 100) / 100
   }));
 
-  // Colors untuk pie chart
-  const COLORS = ['#22d3ee', '#a78bfa', '#fb923c', '#34d399', '#f472b6', '#fbbf24', '#60a5fa', '#f87171'];
+  // Colors untuk pie chart - Professional gradient palette
+  const COLORS = [
+    '#22d3ee', // cyan-400
+    '#3b82f6', // blue-500
+    '#8b5cf6', // violet-500
+    '#ec4899', // pink-500
+    '#f59e0b', // amber-500
+    '#10b981', // emerald-500
+    '#6366f1', // indigo-500
+    '#f97316', // orange-500
+  ];
 
   if (loading && data.length === 0) {
     return (
@@ -223,16 +232,16 @@ const BBMDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 sm:space-x-4">
-              <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center ${actualTheme === 'dark' ? 'shadow-lg shadow-cyan-500/50' : 'shadow-lg shadow-blue-500/30'}`}>
-                <Droplet className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-xl ${actualTheme === 'dark' ? 'shadow-cyan-500/40' : 'shadow-blue-500/30'} ring-2 ring-white/20`}>
+                <Droplet className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
               </div>
               <div className="hidden sm:block">
-                <h1 className={`text-xl sm:text-3xl font-bold ${colors.text}`}>Sistem Monitoring BBM</h1>
-                <p className={actualTheme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}>Dashboard Real-time</p>
+                <h1 className={`text-xl sm:text-3xl font-bold ${colors.text} bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent`}>Sistem Monitoring BBM</h1>
+                <p className={actualTheme === 'dark' ? 'text-cyan-400/90' : 'text-blue-600/90'}>Dashboard Real-time</p>
               </div>
               <div className="block sm:hidden">
-                <h1 className={`text-lg font-bold ${colors.text}`}>BBM Monitor</h1>
-                <p className={`text-xs ${actualTheme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>Real-time</p>
+                <h1 className={`text-lg font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent`}>BBM Monitor</h1>
+                <p className={`text-xs ${actualTheme === 'dark' ? 'text-cyan-400/90' : 'text-blue-600/90'}`}>Real-time</p>
               </div>
             </div>
             
@@ -272,7 +281,7 @@ const BBMDashboard = () => {
               <button
                 onClick={fetchData}
                 disabled={isRefreshing}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-all duration-300 disabled:opacity-50 shadow-lg shadow-cyan-500/30"
+                className="bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-600 hover:via-blue-700 hover:to-indigo-700 text-white px-4 py-2 rounded-xl flex items-center space-x-2 transition-all duration-300 disabled:opacity-50 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105"
               >
                 <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                 <span>Refresh</span>
@@ -284,7 +293,7 @@ const BBMDashboard = () => {
               <button
                 onClick={fetchData}
                 disabled={isRefreshing}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-2 rounded-lg disabled:opacity-50"
+                className="bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white p-2 rounded-xl disabled:opacity-50 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 active:scale-95 transition-all"
               >
                 <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
               </button>
@@ -385,70 +394,83 @@ const BBMDashboard = () => {
 
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-          <div className="bg-gradient-to-br from-cyan-500 via-blue-500 to-blue-600 rounded-xl shadow-2xl shadow-cyan-500/20 p-4 sm:p-6 text-white border border-cyan-400/20 hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <Droplet className="w-8 h-8 sm:w-10 sm:h-10 opacity-90" />
+          <div className="group relative bg-gradient-to-br from-cyan-400 via-blue-500 to-blue-600 rounded-2xl shadow-2xl shadow-cyan-500/20 p-4 sm:p-6 text-white border border-white/10 hover:scale-105 hover:shadow-cyan-500/40 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative flex items-center justify-between mb-3 sm:mb-4">
+              <Droplet className="w-8 h-8 sm:w-10 sm:h-10 opacity-90 drop-shadow-lg" />
               <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <p className="text-cyan-100 text-xs sm:text-sm mb-1">Total Volume</p>
-            <p className="text-2xl sm:text-3xl font-bold">{totalVolume.toFixed(2)}</p>
-            <p className="text-cyan-100 text-xs sm:text-sm mt-1">Liter</p>
+            <div className="relative">
+              <p className="text-cyan-100 text-xs sm:text-sm mb-1">Total Volume</p>
+              <p className="text-2xl sm:text-3xl font-bold drop-shadow-md">{totalVolume.toFixed(2)}</p>
+              <p className="text-cyan-100 text-xs sm:text-sm mt-1">Liter</p>
+            </div>
           </div>
 
-          <div className="bg-gradient-to-br from-emerald-500 via-teal-500 to-teal-600 rounded-xl shadow-2xl shadow-emerald-500/20 p-4 sm:p-6 text-white border border-emerald-400/20 hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <Activity className="w-8 h-8 sm:w-10 sm:h-10 opacity-90" />
+          <div className="group relative bg-gradient-to-br from-emerald-400 via-teal-500 to-teal-600 rounded-2xl shadow-2xl shadow-emerald-500/20 p-4 sm:p-6 text-white border border-white/10 hover:scale-105 hover:shadow-emerald-500/40 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative flex items-center justify-between mb-3 sm:mb-4">
+              <Activity className="w-8 h-8 sm:w-10 sm:h-10 opacity-90 drop-shadow-lg" />
               <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <p className="text-emerald-100 text-xs sm:text-sm mb-1">Total Transaksi</p>
-            <p className="text-2xl sm:text-3xl font-bold">{totalTransactions}</p>
-            <p className="text-emerald-100 text-xs sm:text-sm mt-1">Pengisian</p>
+            <div className="relative">
+              <p className="text-emerald-100 text-xs sm:text-sm mb-1">Total Transaksi</p>
+              <p className="text-2xl sm:text-3xl font-bold drop-shadow-md">{totalTransactions}</p>
+              <p className="text-emerald-100 text-xs sm:text-sm mt-1">Pengisian</p>
+            </div>
           </div>
 
-          <div className="bg-gradient-to-br from-violet-500 via-purple-500 to-purple-600 rounded-xl shadow-2xl shadow-violet-500/20 p-4 sm:p-6 text-white border border-violet-400/20 hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <Calendar className="w-8 h-8 sm:w-10 sm:h-10 opacity-90" />
+          <div className="group relative bg-gradient-to-br from-violet-400 via-purple-500 to-purple-600 rounded-2xl shadow-2xl shadow-violet-500/20 p-4 sm:p-6 text-white border border-white/10 hover:scale-105 hover:shadow-violet-500/40 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative flex items-center justify-between mb-3 sm:mb-4">
+              <Calendar className="w-8 h-8 sm:w-10 sm:h-10 opacity-90 drop-shadow-lg" />
               <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <p className="text-violet-100 text-xs sm:text-sm mb-1">Unit Aktif</p>
-            <p className="text-2xl sm:text-3xl font-bold">{uniqueUnits.length}</p>
-            <p className="text-violet-100 text-xs sm:text-sm mt-1">Kendaraan</p>
+            <div className="relative">
+              <p className="text-violet-100 text-xs sm:text-sm mb-1">Unit Aktif</p>
+              <p className="text-2xl sm:text-3xl font-bold drop-shadow-md">{uniqueUnits.length}</p>
+              <p className="text-violet-100 text-xs sm:text-sm mt-1">Kendaraan</p>
+            </div>
           </div>
 
-          <div className="bg-gradient-to-br from-amber-500 via-orange-500 to-orange-600 rounded-xl shadow-2xl shadow-amber-500/20 p-4 sm:p-6 text-white border border-amber-400/20 hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 opacity-90" />
+          <div className="group relative bg-gradient-to-br from-amber-400 via-orange-500 to-orange-600 rounded-2xl shadow-2xl shadow-amber-500/20 p-4 sm:p-6 text-white border border-white/10 hover:scale-105 hover:shadow-amber-500/40 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative flex items-center justify-between mb-3 sm:mb-4">
+              <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 opacity-90 drop-shadow-lg" />
               <Activity className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <p className="text-amber-100 text-xs sm:text-sm mb-1">Rata-rata</p>
-            <p className="text-2xl sm:text-3xl font-bold">{avgVolume.toFixed(2)}</p>
-            <p className="text-amber-100 text-xs sm:text-sm mt-1">Liter/Transaksi</p>
+            <div className="relative">
+              <p className="text-amber-100 text-xs sm:text-sm mb-1">Rata-rata</p>
+              <p className="text-2xl sm:text-3xl font-bold drop-shadow-md">{avgVolume.toFixed(2)}</p>
+              <p className="text-amber-100 text-xs sm:text-sm mt-1">Liter/Transaksi</p>
+            </div>
           </div>
         </div>
 
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
           {/* Bar Chart - Volume per Unit */}
-          <div className={`${colors.cardBg} rounded-xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6`}>
+          <div className={`${colors.cardBg} rounded-2xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6 hover:shadow-3xl transition-shadow duration-300`}>
             <h3 className={`text-lg sm:text-xl font-bold ${colors.text} mb-4 flex items-center`}>
-              <div className="w-1 h-5 sm:h-6 bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full mr-2 sm:mr-3"></div>
+              <div className="w-1.5 h-5 sm:h-6 bg-gradient-to-b from-cyan-400 via-blue-500 to-indigo-500 rounded-full mr-2 sm:mr-3 shadow-lg"></div>
               <span className="text-sm sm:text-xl">Volume BBM per Unit</span>
             </h3>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={chartDataUnits}>
-                <CartesianGrid strokeDasharray="3 3" stroke={colors.chartGrid} />
+                <CartesianGrid strokeDasharray="3 3" stroke={colors.chartGrid} opacity={0.3} />
                 <XAxis dataKey="name" stroke={colors.chartAxis} style={{ fontSize: '12px' }} />
                 <YAxis stroke={colors.chartAxis} style={{ fontSize: '12px' }} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: colors.chartTooltipBg, border: `1px solid ${colors.chartTooltipBorder}`, borderRadius: '8px' }}
-                  labelStyle={{ color: actualTheme === 'dark' ? '#f1f5f9' : '#1e293b' }}
+                  contentStyle={{ backgroundColor: colors.chartTooltipBg, border: `1px solid ${colors.chartTooltipBorder}`, borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  labelStyle={{ color: actualTheme === 'dark' ? '#f1f5f9' : '#1e293b', fontWeight: 'bold' }}
                   itemStyle={{ color: '#22d3ee' }}
                 />
                 <Bar dataKey="volume" fill="url(#colorBar)" radius={[8, 8, 0, 0]} />
                 <defs>
                   <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#22d3ee" stopOpacity={1}/>
-                    <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                    <stop offset="50%" stopColor="#3b82f6" stopOpacity={0.9}/>
+                    <stop offset="100%" stopColor="#6366f1" stopOpacity={0.8}/>
                   </linearGradient>
                 </defs>
               </BarChart>
@@ -456,9 +478,9 @@ const BBMDashboard = () => {
           </div>
 
           {/* Pie Chart - Distribusi Volume */}
-          <div className={`${colors.cardBg} rounded-xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6`}>
+          <div className={`${colors.cardBg} rounded-2xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6 hover:shadow-3xl transition-shadow duration-300`}>
             <h3 className={`text-lg sm:text-xl font-bold ${colors.text} mb-4 flex items-center`}>
-              <div className="w-1 h-5 sm:h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full mr-2 sm:mr-3"></div>
+              <div className="w-1.5 h-5 sm:h-6 bg-gradient-to-b from-emerald-400 via-teal-500 to-cyan-500 rounded-full mr-2 sm:mr-3 shadow-lg"></div>
               <span className="text-sm sm:text-xl">Distribusi Volume</span>
             </h3>
             <ResponsiveContainer width="100%" height={250}>
@@ -478,8 +500,8 @@ const BBMDashboard = () => {
                   ))}
                 </Pie>
                 <Tooltip 
-                  contentStyle={{ backgroundColor: colors.chartTooltipBg, border: `1px solid ${colors.chartTooltipBorder}`, borderRadius: '8px' }}
-                  labelStyle={{ color: actualTheme === 'dark' ? '#f1f5f9' : '#1e293b' }}
+                  contentStyle={{ backgroundColor: colors.chartTooltipBg, border: `1px solid ${colors.chartTooltipBorder}`, borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  labelStyle={{ color: actualTheme === 'dark' ? '#f1f5f9' : '#1e293b', fontWeight: 'bold' }}
                   itemStyle={{ color: '#22d3ee' }}
                 />
               </PieChart>
@@ -489,33 +511,40 @@ const BBMDashboard = () => {
 
         {/* Line Chart - Trend Volume */}
         {chartDataDays.length > 1 && (
-          <div className={`${colors.cardBg} rounded-xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6 mb-6`}>
+          <div className={`${colors.cardBg} rounded-2xl shadow-2xl border ${colors.cardBorder} p-4 sm:p-6 mb-6 hover:shadow-3xl transition-shadow duration-300`}>
             <h3 className={`text-lg sm:text-xl font-bold ${colors.text} mb-4 flex items-center`}>
-              <div className="w-1 h-5 sm:h-6 bg-gradient-to-b from-violet-500 to-purple-500 rounded-full mr-2 sm:mr-3"></div>
+              <div className="w-1.5 h-5 sm:h-6 bg-gradient-to-b from-violet-400 via-purple-500 to-fuchsia-500 rounded-full mr-2 sm:mr-3 shadow-lg"></div>
               <span className="text-sm sm:text-xl">Trend Volume Harian</span>
             </h3>
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={chartDataDays}>
-                <CartesianGrid strokeDasharray="3 3" stroke={colors.chartGrid} />
+                <CartesianGrid strokeDasharray="3 3" stroke={colors.chartGrid} opacity={0.3} />
                 <XAxis dataKey="date" stroke={colors.chartAxis} style={{ fontSize: '12px' }} />
                 <YAxis stroke={colors.chartAxis} style={{ fontSize: '12px' }} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: colors.chartTooltipBg, border: `1px solid ${colors.chartTooltipBorder}`, borderRadius: '8px' }}
-                  labelStyle={{ color: actualTheme === 'dark' ? '#f1f5f9' : '#1e293b' }}
+                  contentStyle={{ backgroundColor: colors.chartTooltipBg, border: `1px solid ${colors.chartTooltipBorder}`, borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  labelStyle={{ color: actualTheme === 'dark' ? '#f1f5f9' : '#1e293b', fontWeight: 'bold' }}
                   itemStyle={{ color: '#a78bfa' }}
                 />
                 <Legend wrapperStyle={{ color: colors.text }} />
-                <Line type="monotone" dataKey="volume" stroke="#a78bfa" strokeWidth={3} dot={{ fill: '#8b5cf6', r: 4 }} activeDot={{ r: 6 }} />
+                <Line type="monotone" dataKey="volume" stroke="url(#colorLine)" strokeWidth={3} dot={{ fill: '#8b5cf6', r: 4, strokeWidth: 2, stroke: '#fff' }} activeDot={{ r: 6 }} />
+                <defs>
+                  <linearGradient id="colorLine" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#a78bfa" stopOpacity={1}/>
+                    <stop offset="50%" stopColor="#8b5cf6" stopOpacity={1}/>
+                    <stop offset="100%" stopColor="#d946ef" stopOpacity={1}/>
+                  </linearGradient>
+                </defs>
               </LineChart>
             </ResponsiveContainer>
           </div>
         )}
 
         {/* Data Table */}
-        <div className={`${colors.cardBg} rounded-xl shadow-2xl border ${colors.cardBorder} overflow-hidden`}>
-          <div className={`px-4 sm:px-6 py-4 border-b ${colors.cardBorder} bg-gradient-to-r ${actualTheme === 'dark' ? 'from-slate-800 to-slate-700' : 'from-gray-50 to-white'}`}>
+        <div className={`${colors.cardBg} rounded-2xl shadow-2xl border ${colors.cardBorder} overflow-hidden hover:shadow-3xl transition-shadow duration-300`}>
+          <div className={`px-4 sm:px-6 py-4 border-b ${colors.cardBorder} bg-gradient-to-r ${actualTheme === 'dark' ? 'from-slate-800/80 via-slate-700/60 to-slate-800/80' : 'from-slate-50/80 via-blue-50/60 to-slate-50/80'}`}>
             <h3 className={`text-lg sm:text-xl font-bold ${colors.text} flex items-center`}>
-              <div className="w-1 h-5 sm:h-6 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full mr-2 sm:mr-3"></div>
+              <div className="w-1.5 h-5 sm:h-6 bg-gradient-to-b from-amber-400 via-orange-500 to-red-500 rounded-full mr-2 sm:mr-3 shadow-lg"></div>
               Riwayat Transaksi
             </h3>
             <p className={`text-xs sm:text-sm ${colors.textSecondary} mt-1`}>
@@ -557,7 +586,7 @@ const BBMDashboard = () => {
                         </div>
                       </td>
                       <td className="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
-                        <span className={`px-2 sm:px-3 py-1 inline-flex text-xs sm:text-sm leading-5 font-semibold rounded-full ${actualTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-500/30' : 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800 border border-blue-300'}`}>
+                        <span className={`px-2 sm:px-3 py-1 inline-flex text-xs sm:text-sm leading-5 font-semibold rounded-full ${actualTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/30' : 'bg-gradient-to-r from-blue-100 via-cyan-100 to-indigo-100 text-blue-800 border border-blue-300'}`}>
                           {item.unit}
                         </span>
                       </td>
