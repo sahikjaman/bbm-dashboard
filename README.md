@@ -21,16 +21,6 @@ Dashboard monitoring konsumsi BBM (Bahan Bakar Minyak) berbasis web dengan visua
 - **Icons**: Lucide React
 - **Data Source**: Google Sheets API
 
-## 📋 Prasyarat
-
-- Node.js 18+ dan npm
-- Google Sheets API Key
-- Google Spreadsheet dengan format:
-  - Kolom A: Timestamp
-  - Kolom B: Unit Kendaraan
-  - Kolom C: Volume (Liter)
-  - Kolom D: EPC
-
 ## 🚀 Instalasi
 
 1. Clone repository:
@@ -62,22 +52,6 @@ npm run build
 npm start
 ```
 
-## 📁 Struktur Project
-
-```
-bbm-dashboard/
-├── pages/
-│   ├── _app.js          # App wrapper dengan global styles
-│   └── index.js         # Dashboard utama
-├── styles/
-│   └── globals.css      # Global CSS dengan Tailwind
-├── public/              # Static assets
-├── package.json         # Dependencies
-├── next.config.js       # Konfigurasi Next.js
-├── tailwind.config.js   # Konfigurasi Tailwind CSS
-└── postcss.config.js    # Konfigurasi PostCSS
-```
-
 ## 🎯 Fitur Dashboard
 
 ### 📊 Statistik Cards
@@ -96,24 +70,9 @@ bbm-dashboard/
 - Sortir berdasarkan waktu terbaru
 - Hover effect untuk kemudahan membaca
 
-## 🔧 Konfigurasi
-
-### Google Sheets Setup
-1. Buat Google Spreadsheet baru
-2. Format data sesuai kolom yang dibutuhkan
-3. Enable Google Sheets API di Google Cloud Console
-4. Generate API Key
-5. Update credentials di `pages/index.js`
-
 ## 🤝 Kontribusi
 
 Kontribusi sangat diterima! Silakan buat Pull Request atau laporkan issue.
-
-## 📄 Lisensi
-
-MIT License - silakan digunakan untuk keperluan apapun.
-
-## 👨‍💻 Developer
 
 Dikembangkan dengan ❤️ untuk monitoring BBM yang lebih efisien.
 
